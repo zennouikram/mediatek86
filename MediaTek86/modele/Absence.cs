@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MediaTek86.modele
 {
-    class Absence
+    /// <summary>
+    /// Création d'une absence
+    /// </summary>
+    public class Absence
     {
         // Déclaration des propriétés
         private int idpersonnel;
