@@ -1,0 +1,280 @@
+From c0d49cdbfc3dcdf4be81c49a90be5c4af49aadaa Mon Sep 17 00:00:00 2001
+From: florent Richard <florent.r08@live.fr>
+Date: Mon, 19 Apr 2021 11:20:39 +0200
+Subject: [PATCH] =?UTF-8?q?Ajout=20de=20la=20fonctionnalit=C3=A9=20pour=20?=
+ =?UTF-8?q?modifier=20un=20personnel?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ MediaTek86/controle/Controle.cs               |   9 ++
+ MediaTek86/dal/AccesDonnees.cs                |  19 ++++
+ MediaTek86/vue/ListePersonnel.Designer.cs     |   1 +
+ MediaTek86/vue/ListePersonnel.cs              |  30 ++++++
+ .../vue/ModificationPersonnel.Designer.cs     |   3 +
+ MediaTek86/vue/ModificationPersonnel.cs       | 102 +++++++++++++++++-
+ 6 files changed, 162 insertions(+), 2 deletions(-)
+
+diff --git a/MediaTek86/controle/Controle.cs b/MediaTek86/controle/Controle.cs
+index d335715..7976b22 100644
+--- a/MediaTek86/controle/Controle.cs
++++ b/MediaTek86/controle/Controle.cs
+@@ -63,5 +63,14 @@ namespace MediaTek86.controle
+         {
+             AccesDonnees.DelPersonnel(personnel);
+         }
++
++        /// <summary>
++        /// Demande de modification d'un personnel
++        /// </summary>
++        /// <param name="personnel"></param>
++        public void UpdatePersonnel(Personnel personnel)
++        {
++            AccesDonnees.UpdatePersonnel(personnel);
++        }
+     }
+ }
+diff --git a/MediaTek86/dal/AccesDonnees.cs b/MediaTek86/dal/AccesDonnees.cs
+index c51f968..76ac559 100644
+--- a/MediaTek86/dal/AccesDonnees.cs
++++ b/MediaTek86/dal/AccesDonnees.cs
+@@ -87,6 +87,25 @@ namespace MediaTek86.dal
+             conn.ReqUpdate(req, parameters);
+         }
+ 
++        /// <summary>
++        /// Modification d'un personnel
++        /// </summary>
++        /// <param name="personnel"></param>
++        public static void UpdatePersonnel(Personnel personnel)
++        {
++            string req = "update personnel set nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idservice = @idservice ";
++            req += "where idpersonnel = @idpersonnel;";
++            Dictionary<string, object> parameters = new Dictionary<string, object>();
++            parameters.Add("@idpersonnel", personnel.Idpersonnel);
++            parameters.Add("@nom", personnel.Nom);
++            parameters.Add("@prenom", personnel.Prenom);
++            parameters.Add("@tel", personnel.Tel);
++            parameters.Add("@mail", personnel.Mail);
++            parameters.Add("@idservice", personnel.Idservice);
++            ConnexionBDD conn = ConnexionBDD.GetInstance(connectionString);
++            conn.ReqUpdate(req, parameters);
++        }
++
+     }
+ 
+ }
+diff --git a/MediaTek86/vue/ListePersonnel.Designer.cs b/MediaTek86/vue/ListePersonnel.Designer.cs
+index ceeca1a..d29b890 100644
+--- a/MediaTek86/vue/ListePersonnel.Designer.cs
++++ b/MediaTek86/vue/ListePersonnel.Designer.cs
+@@ -67,6 +67,7 @@
+             this.btnModifPersonnel.TabIndex = 2;
+             this.btnModifPersonnel.Text = "Modifier le personnel";
+             this.btnModifPersonnel.UseVisualStyleBackColor = true;
++            this.btnModifPersonnel.Click += new System.EventHandler(this.btnModifPersonnel_Click);
+             // 
+             // btnGererAbsence
+             // 
+diff --git a/MediaTek86/vue/ListePersonnel.cs b/MediaTek86/vue/ListePersonnel.cs
+index ce80e22..3bffb5c 100644
+--- a/MediaTek86/vue/ListePersonnel.cs
++++ b/MediaTek86/vue/ListePersonnel.cs
+@@ -19,6 +19,8 @@ namespace MediaTek86.vue
+         /// </summary>
+         private Controle controle;
+ 
++        private frmModificationPersonnel frmModificationPersonnel;
++
+         /// <summary>
+         /// Objet pour gérer la liste du personnel
+         /// </summary>
+@@ -162,5 +164,33 @@ namespace MediaTek86.vue
+                 MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
+             }
+         }
++
++        /// <summary>
++        /// Affiche la fenêtre pour modifier un personnel
++        /// </summary>
++        /// <param name="sender"></param>
++        /// <param name="e"></param>
++        private void btnModifPersonnel_Click(object sender, EventArgs e)
++        {
++            if (dgvPersonnel.SelectedRows.Count > 0)
++            {
++                // Ferme la fenêtre active
++                this.Hide();
++                frmModificationPersonnel = new frmModificationPersonnel(controle);
++                Personnel personnel = (Personnel)bdgPersonnel.List[bdgPersonnel.Position];
++                frmModificationPersonnel.idpersonnel = personnel.Idpersonnel;
++                frmModificationPersonnel.nom = personnel.Nom;
++                frmModificationPersonnel.prenom = personnel.Prenom;
++                frmModificationPersonnel.tel = personnel.Tel;
++                frmModificationPersonnel.mail = personnel.Mail;
++                frmModificationPersonnel.service = personnel.Service;
++                // Ouvre la fenêtre frmModificationPersonnel
++                frmModificationPersonnel.ShowDialog();
++            }
++            else
++            {
++                MessageBox.Show("Une ligne doit être sélectionnée.", "Information");
++            }
++        }
+     }
+ }
+diff --git a/MediaTek86/vue/ModificationPersonnel.Designer.cs b/MediaTek86/vue/ModificationPersonnel.Designer.cs
+index 89f13b2..71ba1dc 100644
+--- a/MediaTek86/vue/ModificationPersonnel.Designer.cs
++++ b/MediaTek86/vue/ModificationPersonnel.Designer.cs
+@@ -61,6 +61,7 @@
+             this.btnEnregistrerModif.TabIndex = 25;
+             this.btnEnregistrerModif.Text = "Enregistrer les modifications";
+             this.btnEnregistrerModif.UseVisualStyleBackColor = true;
++            this.btnEnregistrerModif.Click += new System.EventHandler(this.btnEnregistrerModif_Click);
+             // 
+             // cbbService
+             // 
+@@ -165,6 +166,7 @@
+             this.btnAnnulerModif.TabIndex = 26;
+             this.btnAnnulerModif.Text = "Annuler les modifications";
+             this.btnAnnulerModif.UseVisualStyleBackColor = true;
++            this.btnAnnulerModif.Click += new System.EventHandler(this.btnAnnulerModif_Click);
+             // 
+             // frmModificationPersonnel
+             // 
+@@ -186,6 +188,7 @@
+             this.Controls.Add(this.lblDescription);
+             this.Name = "frmModificationPersonnel";
+             this.Text = "Modification du personnel";
++            this.Load += new System.EventHandler(this.frmModificationPersonnel_Load);
+             this.ResumeLayout(false);
+             this.PerformLayout();
+ 
+diff --git a/MediaTek86/vue/ModificationPersonnel.cs b/MediaTek86/vue/ModificationPersonnel.cs
+index 3160a8c..6553429 100644
+--- a/MediaTek86/vue/ModificationPersonnel.cs
++++ b/MediaTek86/vue/ModificationPersonnel.cs
+@@ -1,4 +1,6 @@
+-﻿using System;
++﻿using MediaTek86.controle;
++using MediaTek86.modele;
++using System;
+ using System.Collections.Generic;
+ using System.ComponentModel;
+ using System.Data;
+@@ -12,13 +14,109 @@ namespace MediaTek86.vue
+ {
+     public partial class frmModificationPersonnel : Form
+     {
++        // Déclaration des propriétés
++        public int idpersonnel;
++        public string nom;
++        public string prenom;
++        public string tel;
++        public string mail;
++        public string service;
++
++        private frmListePersonnel frmListePersonnel;
++
++        /// <summary>
++        /// instance du controleur
++        /// </summary>
++        private Controle controle;
++        /// <summary>
++        /// Objet pour gérer la liste des profils
++        /// </summary>
++        BindingSource bdgService = new BindingSource();
++
+         /// <summary>
+         /// Initialisation des composants graphiques
+         /// Récupération du controleur
+         /// </summary>
+-        public frmModificationPersonnel()
++        public frmModificationPersonnel(Controle controle)
+         {
++            this.controle = controle;
+             InitializeComponent();
++            Init();
++        }
++
++        /// <summary>
++        /// Initialisation de la frame : remplissage des listes
++        /// </summary>
++        public void Init()
++        {
++            RemplirListeService();
++        }
++
++        /// <summary>
++        /// Affiche les services
++        /// </summary>
++        public void RemplirListeService()
++        {
++            List<Service> lesServices = controle.GetLesServices();
++            bdgService.DataSource = lesServices;
++            cbbService.DataSource = bdgService;
++            if (cbbService.Items.Count > 0)
++            {
++                cbbService.SelectedIndex = 0;
++            }
++        }
++
++        /// <summary>
++        /// Remplis les zones de texte au chargement de la fenêtre
++        /// </summary>
++        /// <param name="sender"></param>
++        /// <param name="e"></param>
++        private void frmModificationPersonnel_Load(object sender, EventArgs e)
++        {
++            txtNom.Text = nom;
++            txtPrenom.Text = prenom;
++            txtTel.Text = tel;
++            txtMail.Text = mail;
++            cbbService.SelectedIndex = cbbService.FindStringExact(service);
++        }
++
++        /// <summary>
++        /// Annule les modifications et retourne à la liste des personnel
++        /// </summary>
++        /// <param name="sender"></param>
++        /// <param name="e"></param>
++        private void btnAnnulerModif_Click(object sender, EventArgs e)
++        {
++            this.Hide();
++            frmListePersonnel = new frmListePersonnel(controle);
++            frmListePersonnel.ShowDialog();
++        }
++
++        /// <summary>
++        /// Enregistre les modifications du personnel
++        /// </summary>
++        /// <param name="sender"></param>
++        /// <param name="e"></param>
++        private void btnEnregistrerModif_Click(object sender, EventArgs e)
++        {
++            if (!txtNom.Text.Equals("") && !txtPrenom.Text.Equals("") && !txtTel.Text.Equals("") && !txtMail.Text.Equals("") && cbbService.SelectedIndex != -1)
++            {
++                if (MessageBox.Show("Voulez-vous vraiment enregistrer ?", "Confirmation d'enregistrement", MessageBoxButtons.YesNo) == DialogResult.Yes)
++                {
++                    Service service = (Service)bdgService.List[bdgService.Position];
++                    Personnel personnel = new Personnel(this.idpersonnel, txtNom.Text, txtPrenom.Text, txtTel.Text, txtMail.Text, service.Idservice, service.Nom);
++                    controle.UpdatePersonnel(personnel);
++                    Console.WriteLine(personnel.Idpersonnel);
++                    this.Hide();
++                    frmListePersonnel = new frmListePersonnel(controle);
++                    frmListePersonnel.ShowDialog();
++                }
++                
++            }
++            else
++            {
++                MessageBox.Show("Tous les champs doivent être remplis.", "Information");
++            }
+         }
+     }
+ }
+-- 
+2.49.0.windows.1
+
