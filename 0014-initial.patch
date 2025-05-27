@@ -1,0 +1,387 @@
+From 356ff6de9ffbcdcedf932e0543ac2180ecf87d84 Mon Sep 17 00:00:00 2001
+From: florent Richard <florent.r08@live.fr>
+Date: Mon, 3 May 2021 15:03:25 +0200
+Subject: [PATCH] Correction de bugs
+
+---
+ MediaTek86/vue/GererAbsence.Designer.cs       | 36 +++++++++----------
+ MediaTek86/vue/ListePersonnel.Designer.cs     | 32 ++++++++---------
+ MediaTek86/vue/ListePersonnel.cs              |  1 +
+ .../vue/ModificationAbsence.Designer.cs       | 10 +++---
+ .../vue/ModificationPersonnel.Designer.cs     | 14 ++++----
+ MediaTek86/vue/SeConnecter.Designer.cs        |  6 ++--
+ 6 files changed, 50 insertions(+), 49 deletions(-)
+
+diff --git a/MediaTek86/vue/GererAbsence.Designer.cs b/MediaTek86/vue/GererAbsence.Designer.cs
+index 5dbd69b..7c1c725 100644
+--- a/MediaTek86/vue/GererAbsence.Designer.cs
++++ b/MediaTek86/vue/GererAbsence.Designer.cs
+@@ -28,7 +28,7 @@
+         /// </summary>
+         private void InitializeComponent()
+         {
+-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
++            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+             this.btnEnregistrerAbsence = new System.Windows.Forms.Button();
+             this.cbbMotif = new System.Windows.Forms.ComboBox();
+             this.lblMotif = new System.Windows.Forms.Label();
+@@ -54,7 +54,7 @@
+             this.btnEnregistrerAbsence.Location = new System.Drawing.Point(31, 461);
+             this.btnEnregistrerAbsence.Name = "btnEnregistrerAbsence";
+             this.btnEnregistrerAbsence.Size = new System.Drawing.Size(182, 23);
+-            this.btnEnregistrerAbsence.TabIndex = 29;
++            this.btnEnregistrerAbsence.TabIndex = 8;
+             this.btnEnregistrerAbsence.Text = "Enregistrer l\'absence";
+             this.btnEnregistrerAbsence.UseVisualStyleBackColor = true;
+             this.btnEnregistrerAbsence.Click += new System.EventHandler(this.btnEnregistrerAbsence_Click);
+@@ -66,7 +66,7 @@
+             this.cbbMotif.Location = new System.Drawing.Point(152, 429);
+             this.cbbMotif.Name = "cbbMotif";
+             this.cbbMotif.Size = new System.Drawing.Size(152, 26);
+-            this.cbbMotif.TabIndex = 28;
++            this.cbbMotif.TabIndex = 7;
+             // 
+             // lblMotif
+             // 
+@@ -103,7 +103,7 @@
+             this.btnRetourListePerso.Location = new System.Drawing.Point(556, 315);
+             this.btnRetourListePerso.Name = "btnRetourListePerso";
+             this.btnRetourListePerso.Size = new System.Drawing.Size(182, 23);
+-            this.btnRetourListePerso.TabIndex = 18;
++            this.btnRetourListePerso.TabIndex = 3;
+             this.btnRetourListePerso.Text = "Retour à la liste du personnel";
+             this.btnRetourListePerso.UseVisualStyleBackColor = true;
+             this.btnRetourListePerso.Click += new System.EventHandler(this.btnRetourListePerso_Click);
+@@ -113,7 +113,7 @@
+             this.btnModifAbsence.Location = new System.Drawing.Point(292, 315);
+             this.btnModifAbsence.Name = "btnModifAbsence";
+             this.btnModifAbsence.Size = new System.Drawing.Size(182, 23);
+-            this.btnModifAbsence.TabIndex = 17;
++            this.btnModifAbsence.TabIndex = 2;
+             this.btnModifAbsence.Text = "Modifier l\'absence";
+             this.btnModifAbsence.UseVisualStyleBackColor = true;
+             this.btnModifAbsence.Click += new System.EventHandler(this.btnModifAbsence_Click);
+@@ -123,7 +123,7 @@
+             this.btnSupAbsence.Location = new System.Drawing.Point(31, 315);
+             this.btnSupAbsence.Name = "btnSupAbsence";
+             this.btnSupAbsence.Size = new System.Drawing.Size(182, 23);
+-            this.btnSupAbsence.TabIndex = 16;
++            this.btnSupAbsence.TabIndex = 1;
+             this.btnSupAbsence.Text = "Supprimer l\'absence";
+             this.btnSupAbsence.UseVisualStyleBackColor = true;
+             this.btnSupAbsence.Click += new System.EventHandler(this.btnSupAbsence_Click);
+@@ -132,14 +132,14 @@
+             // 
+             this.dgvAbsence.AllowUserToAddRows = false;
+             this.dgvAbsence.AllowUserToDeleteRows = false;
+-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+-            this.dgvAbsence.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
++            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
++            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
++            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
++            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
++            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
++            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
++            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
++            this.dgvAbsence.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+             this.dgvAbsence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+             this.dgvAbsence.Location = new System.Drawing.Point(32, 33);
+             this.dgvAbsence.Name = "dgvAbsence";
+@@ -189,21 +189,21 @@
+             this.dtpDateDebut.Location = new System.Drawing.Point(152, 369);
+             this.dtpDateDebut.Name = "dtpDateDebut";
+             this.dtpDateDebut.Size = new System.Drawing.Size(173, 20);
+-            this.dtpDateDebut.TabIndex = 35;
++            this.dtpDateDebut.TabIndex = 5;
+             // 
+             // dtpDateFin
+             // 
+             this.dtpDateFin.Location = new System.Drawing.Point(152, 403);
+             this.dtpDateFin.Name = "dtpDateFin";
+             this.dtpDateFin.Size = new System.Drawing.Size(173, 20);
+-            this.dtpDateFin.TabIndex = 36;
++            this.dtpDateFin.TabIndex = 6;
+             // 
+             // btnAjouterAbsence
+             // 
+             this.btnAjouterAbsence.Location = new System.Drawing.Point(32, 344);
+             this.btnAjouterAbsence.Name = "btnAjouterAbsence";
+             this.btnAjouterAbsence.Size = new System.Drawing.Size(182, 23);
+-            this.btnAjouterAbsence.TabIndex = 37;
++            this.btnAjouterAbsence.TabIndex = 4;
+             this.btnAjouterAbsence.Text = "Ajouter une absence";
+             this.btnAjouterAbsence.UseVisualStyleBackColor = true;
+             this.btnAjouterAbsence.Click += new System.EventHandler(this.btnAjouterAbsence_Click_1);
+@@ -213,7 +213,7 @@
+             this.btnAnnulerAjout.Location = new System.Drawing.Point(219, 461);
+             this.btnAnnulerAjout.Name = "btnAnnulerAjout";
+             this.btnAnnulerAjout.Size = new System.Drawing.Size(152, 23);
+-            this.btnAnnulerAjout.TabIndex = 38;
++            this.btnAnnulerAjout.TabIndex = 9;
+             this.btnAnnulerAjout.Text = "Annuler";
+             this.btnAnnulerAjout.UseVisualStyleBackColor = true;
+             this.btnAnnulerAjout.Click += new System.EventHandler(this.btnAnnulerAjout_Click);
+diff --git a/MediaTek86/vue/ListePersonnel.Designer.cs b/MediaTek86/vue/ListePersonnel.Designer.cs
+index efbdb12..1788580 100644
+--- a/MediaTek86/vue/ListePersonnel.Designer.cs
++++ b/MediaTek86/vue/ListePersonnel.Designer.cs
+@@ -28,7 +28,7 @@
+         /// </summary>
+         private void InitializeComponent()
+         {
+-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
++            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+             this.btnSupPersonnel = new System.Windows.Forms.Button();
+             this.btnModifPersonnel = new System.Windows.Forms.Button();
+             this.btnGererAbsence = new System.Windows.Forms.Button();
+@@ -123,7 +123,7 @@
+             this.txtNom.Location = new System.Drawing.Point(122, 360);
+             this.txtNom.Name = "txtNom";
+             this.txtNom.Size = new System.Drawing.Size(113, 24);
+-            this.txtNom.TabIndex = 8;
++            this.txtNom.TabIndex = 5;
+             // 
+             // txtMail
+             // 
+@@ -131,7 +131,7 @@
+             this.txtMail.Location = new System.Drawing.Point(122, 419);
+             this.txtMail.Name = "txtMail";
+             this.txtMail.Size = new System.Drawing.Size(261, 24);
+-            this.txtMail.TabIndex = 9;
++            this.txtMail.TabIndex = 8;
+             // 
+             // lblPrenom
+             // 
+@@ -149,7 +149,7 @@
+             this.txtPrenom.Location = new System.Drawing.Point(394, 359);
+             this.txtPrenom.Name = "txtPrenom";
+             this.txtPrenom.Size = new System.Drawing.Size(113, 24);
+-            this.txtPrenom.TabIndex = 11;
++            this.txtPrenom.TabIndex = 6;
+             // 
+             // lblService
+             // 
+@@ -168,14 +168,14 @@
+             this.cbbService.Location = new System.Drawing.Point(394, 393);
+             this.cbbService.Name = "cbbService";
+             this.cbbService.Size = new System.Drawing.Size(152, 26);
+-            this.cbbService.TabIndex = 13;
++            this.cbbService.TabIndex = 9;
+             // 
+             // btnAjouterPersonnel
+             // 
+             this.btnAjouterPersonnel.Location = new System.Drawing.Point(25, 327);
+             this.btnAjouterPersonnel.Name = "btnAjouterPersonnel";
+             this.btnAjouterPersonnel.Size = new System.Drawing.Size(182, 23);
+-            this.btnAjouterPersonnel.TabIndex = 14;
++            this.btnAjouterPersonnel.TabIndex = 4;
+             this.btnAjouterPersonnel.Text = "Ajouter au personnel";
+             this.btnAjouterPersonnel.UseVisualStyleBackColor = true;
+             this.btnAjouterPersonnel.Click += new System.EventHandler(this.btnAjouterPersonnel_Click);
+@@ -184,14 +184,14 @@
+             // 
+             this.dgvPersonnel.AllowUserToAddRows = false;
+             this.dgvPersonnel.AllowUserToDeleteRows = false;
+-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+-            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
++            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
++            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
++            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
++            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
++            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
++            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
++            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
++            this.dgvPersonnel.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+             this.dgvPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+             this.dgvPersonnel.Location = new System.Drawing.Point(26, 12);
+             this.dgvPersonnel.Name = "dgvPersonnel";
+@@ -205,7 +205,7 @@
+             this.btnEnregistrerPersonnel.Location = new System.Drawing.Point(122, 449);
+             this.btnEnregistrerPersonnel.Name = "btnEnregistrerPersonnel";
+             this.btnEnregistrerPersonnel.Size = new System.Drawing.Size(182, 23);
+-            this.btnEnregistrerPersonnel.TabIndex = 16;
++            this.btnEnregistrerPersonnel.TabIndex = 10;
+             this.btnEnregistrerPersonnel.Text = "Enregistrer au personnel";
+             this.btnEnregistrerPersonnel.UseVisualStyleBackColor = true;
+             this.btnEnregistrerPersonnel.Click += new System.EventHandler(this.btnEnregistrerPersonnel_Click);
+@@ -215,7 +215,7 @@
+             this.btnAnnulerAjout.Location = new System.Drawing.Point(394, 449);
+             this.btnAnnulerAjout.Name = "btnAnnulerAjout";
+             this.btnAnnulerAjout.Size = new System.Drawing.Size(152, 23);
+-            this.btnAnnulerAjout.TabIndex = 17;
++            this.btnAnnulerAjout.TabIndex = 11;
+             this.btnAnnulerAjout.Text = "Annuler";
+             this.btnAnnulerAjout.UseVisualStyleBackColor = true;
+             this.btnAnnulerAjout.Click += new System.EventHandler(this.btnAnnulerAjout_Click);
+diff --git a/MediaTek86/vue/ListePersonnel.cs b/MediaTek86/vue/ListePersonnel.cs
+index a827e88..2278ba0 100644
+--- a/MediaTek86/vue/ListePersonnel.cs
++++ b/MediaTek86/vue/ListePersonnel.cs
+@@ -107,6 +107,7 @@ namespace MediaTek86.vue
+         private void btnAjouterPersonnel_Click(object sender, EventArgs e)
+         {
+             GererZoneTexte(true);
++            txtNom.Focus();
+         }
+ 
+         /// <summary>
+diff --git a/MediaTek86/vue/ModificationAbsence.Designer.cs b/MediaTek86/vue/ModificationAbsence.Designer.cs
+index 78a49ec..aff2323 100644
+--- a/MediaTek86/vue/ModificationAbsence.Designer.cs
++++ b/MediaTek86/vue/ModificationAbsence.Designer.cs
+@@ -68,7 +68,7 @@
+             this.btnEnregistrer.Location = new System.Drawing.Point(19, 174);
+             this.btnEnregistrer.Name = "btnEnregistrer";
+             this.btnEnregistrer.Size = new System.Drawing.Size(182, 23);
+-            this.btnEnregistrer.TabIndex = 37;
++            this.btnEnregistrer.TabIndex = 4;
+             this.btnEnregistrer.Text = "Enregistrer les modifications";
+             this.btnEnregistrer.UseVisualStyleBackColor = true;
+             this.btnEnregistrer.Click += new System.EventHandler(this.btnEnregistrer_Click);
+@@ -85,7 +85,7 @@
+             this.cbbMotif.Location = new System.Drawing.Point(138, 142);
+             this.cbbMotif.Name = "cbbMotif";
+             this.cbbMotif.Size = new System.Drawing.Size(152, 26);
+-            this.cbbMotif.TabIndex = 36;
++            this.cbbMotif.TabIndex = 3;
+             // 
+             // lblMotif
+             // 
+@@ -158,7 +158,7 @@
+             this.btnAnnuler.Location = new System.Drawing.Point(318, 174);
+             this.btnAnnuler.Name = "btnAnnuler";
+             this.btnAnnuler.Size = new System.Drawing.Size(182, 23);
+-            this.btnAnnuler.TabIndex = 42;
++            this.btnAnnuler.TabIndex = 5;
+             this.btnAnnuler.Text = "Annuler les modifications";
+             this.btnAnnuler.UseVisualStyleBackColor = true;
+             this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
+@@ -168,14 +168,14 @@
+             this.dtpDateDebut.Location = new System.Drawing.Point(138, 84);
+             this.dtpDateDebut.Name = "dtpDateDebut";
+             this.dtpDateDebut.Size = new System.Drawing.Size(173, 20);
+-            this.dtpDateDebut.TabIndex = 43;
++            this.dtpDateDebut.TabIndex = 1;
+             // 
+             // dtpDateFin
+             // 
+             this.dtpDateFin.Location = new System.Drawing.Point(138, 112);
+             this.dtpDateFin.Name = "dtpDateFin";
+             this.dtpDateFin.Size = new System.Drawing.Size(173, 20);
+-            this.dtpDateFin.TabIndex = 44;
++            this.dtpDateFin.TabIndex = 2;
+             // 
+             // frmModificationAbsence
+             // 
+diff --git a/MediaTek86/vue/ModificationPersonnel.Designer.cs b/MediaTek86/vue/ModificationPersonnel.Designer.cs
+index caa55d3..68d9033 100644
+--- a/MediaTek86/vue/ModificationPersonnel.Designer.cs
++++ b/MediaTek86/vue/ModificationPersonnel.Designer.cs
+@@ -58,7 +58,7 @@
+             this.btnEnregistrerModif.Location = new System.Drawing.Point(126, 135);
+             this.btnEnregistrerModif.Name = "btnEnregistrerModif";
+             this.btnEnregistrerModif.Size = new System.Drawing.Size(182, 23);
+-            this.btnEnregistrerModif.TabIndex = 25;
++            this.btnEnregistrerModif.TabIndex = 6;
+             this.btnEnregistrerModif.Text = "Enregistrer les modifications";
+             this.btnEnregistrerModif.UseVisualStyleBackColor = true;
+             this.btnEnregistrerModif.Click += new System.EventHandler(this.btnEnregistrerModif_Click);
+@@ -70,7 +70,7 @@
+             this.cbbService.Location = new System.Drawing.Point(398, 70);
+             this.cbbService.Name = "cbbService";
+             this.cbbService.Size = new System.Drawing.Size(152, 26);
+-            this.cbbService.TabIndex = 24;
++            this.cbbService.TabIndex = 5;
+             // 
+             // lblService
+             // 
+@@ -88,7 +88,7 @@
+             this.txtPrenom.Location = new System.Drawing.Point(398, 36);
+             this.txtPrenom.Name = "txtPrenom";
+             this.txtPrenom.Size = new System.Drawing.Size(113, 24);
+-            this.txtPrenom.TabIndex = 22;
++            this.txtPrenom.TabIndex = 2;
+             // 
+             // lblPrenom
+             // 
+@@ -106,7 +106,7 @@
+             this.txtMail.Location = new System.Drawing.Point(126, 96);
+             this.txtMail.Name = "txtMail";
+             this.txtMail.Size = new System.Drawing.Size(177, 24);
+-            this.txtMail.TabIndex = 20;
++            this.txtMail.TabIndex = 4;
+             // 
+             // txtNom
+             // 
+@@ -114,7 +114,7 @@
+             this.txtNom.Location = new System.Drawing.Point(126, 37);
+             this.txtNom.Name = "txtNom";
+             this.txtNom.Size = new System.Drawing.Size(113, 24);
+-            this.txtNom.TabIndex = 19;
++            this.txtNom.TabIndex = 1;
+             // 
+             // txtTel
+             // 
+@@ -122,7 +122,7 @@
+             this.txtTel.Location = new System.Drawing.Point(126, 67);
+             this.txtTel.Name = "txtTel";
+             this.txtTel.Size = new System.Drawing.Size(113, 24);
+-            this.txtTel.TabIndex = 18;
++            this.txtTel.TabIndex = 3;
+             // 
+             // lblMail
+             // 
+@@ -159,7 +159,7 @@
+             this.btnAnnulerModif.Location = new System.Drawing.Point(368, 135);
+             this.btnAnnulerModif.Name = "btnAnnulerModif";
+             this.btnAnnulerModif.Size = new System.Drawing.Size(182, 23);
+-            this.btnAnnulerModif.TabIndex = 26;
++            this.btnAnnulerModif.TabIndex = 7;
+             this.btnAnnulerModif.Text = "Annuler les modifications";
+             this.btnAnnulerModif.UseVisualStyleBackColor = true;
+             this.btnAnnulerModif.Click += new System.EventHandler(this.btnAnnulerModif_Click);
+diff --git a/MediaTek86/vue/SeConnecter.Designer.cs b/MediaTek86/vue/SeConnecter.Designer.cs
+index d4044f2..762b93e 100644
+--- a/MediaTek86/vue/SeConnecter.Designer.cs
++++ b/MediaTek86/vue/SeConnecter.Designer.cs
+@@ -58,7 +58,7 @@
+             this.txtLogin.Location = new System.Drawing.Point(109, 17);
+             this.txtLogin.Name = "txtLogin";
+             this.txtLogin.Size = new System.Drawing.Size(100, 20);
+-            this.txtLogin.TabIndex = 2;
++            this.txtLogin.TabIndex = 1;
+             // 
+             // txtMotDePasse
+             // 
+@@ -66,14 +66,14 @@
+             this.txtMotDePasse.Name = "txtMotDePasse";
+             this.txtMotDePasse.PasswordChar = '*';
+             this.txtMotDePasse.Size = new System.Drawing.Size(100, 20);
+-            this.txtMotDePasse.TabIndex = 3;
++            this.txtMotDePasse.TabIndex = 2;
+             // 
+             // btnSeConnecter
+             // 
+             this.btnSeConnecter.Location = new System.Drawing.Point(247, 51);
+             this.btnSeConnecter.Name = "btnSeConnecter";
+             this.btnSeConnecter.Size = new System.Drawing.Size(100, 20);
+-            this.btnSeConnecter.TabIndex = 4;
++            this.btnSeConnecter.TabIndex = 3;
+             this.btnSeConnecter.Text = "Se Connecter";
+             this.btnSeConnecter.UseVisualStyleBackColor = true;
+             this.btnSeConnecter.Click += new System.EventHandler(this.btnSeConnecter_Click);
+-- 
+2.49.0.windows.1
+
